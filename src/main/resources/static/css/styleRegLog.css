@@ -1,0 +1,82 @@
+body {
+    background-color: rgb(255, 249, 239);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    min-height: 80vh;
+}
+
+.container {
+    background-color: white;
+    width: 450px;
+    border-radius: 16px;
+    -webkit-box-shadow: 18px 16px 38px -39px rgba(0, 0, 0, 1);
+    -moz-box-shadow: 18px 16px 38px -39px rgba(0, 0, 0, 1);
+    box-shadow: 18px 16px 38px -39px rgba(0, 0, 0, 1);
+}
+
+.nextContainer {
+    padding: 25px 30px;
+}
+
+.nextContainer header {
+    font-size: 25px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    text-align: center;
+    color: rgb(82, 51, 51);
+}
+
+.nextContainer form {
+    margin: 5px 0;
+}
+
+.nextContainer form .dataSpace {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+}
+
+.nextContainer form .dataSpace input {
+    height: 30px;
+    width: 100%;
+    font-size: 14px;
+    border: 1px solid rgb(204, 198, 198);
+    margin-top: 3px;
+}
+
+.nextContainer form .errorText {
+    color: red;
+    text-align: center;
+    background-color: rgb(243, 237, 237);
+    margin: 3px 1;
+    border-radius: 16px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 17px;
+}
+
+.nextContainer form .button input {
+    background-color: rgb(46, 45, 45);
+    color: white;
+    border-radius: 10px;
+    font-size: 15px;
+    border: none;
+    font-weight: 500;
+}
+
+.nextContainer .link {
+    margin-top: 10px;
+    text-align: center;
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.taskBar {
+    background-color: red;
+}
+
+.errorText {
+    display: none;
+}

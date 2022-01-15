@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomiar ciala</title>
+    <script type="text/javascript" src="/webjars/jquery/1.12.0/jquery.js"></script>
+    <script type="text/javascript" src="/webjars/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/stylePage.css"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light  bg-navbar mr-1">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="img/logo.png" width="50" height="50" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"  aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 s">
+                <li  class="nav-item ">
+                    <a id="jadlospis" class="nav-link font" th:href="@{/foodmenu}"><img src="img/restaurant.png" width="20" height="20" alt="" class="align-top"> JADŁOSPIS</a>
+                </li>
+                <li class="nav-item">
+                    <a id="licznik" class="nav-link font" th:href="@{/measurement}"><img src="img/cwiczenia.png" width="20" height="20" alt="" class="align-top"> POMIAR CIALA</a>
+                </li>
+
+            </ul>
+            <form th:action="@{/logout}" method="post">
+                <input class="btn btn-color" type="submit" value="Wyloguj sie" />
+            </form>
+        </div>
+    </div>
+</nav>
+<main>
+    <div class="container">
+        <div sec:authorize="isAuthenticated()">
+            Authenticated as <span sec:authentication="name"></span></div>
+        <header>Oblicz zapotrzebowanie na <br><h3>kalorie</h3></header>
+        <form name="measurementForm">
+            <fieldset class="form-group">
+                <div class="row">
+                    <p class="text-center">Podaj swoją płeć</p>
+                    <div class="sa">
+                        <div class="form-check ">
+                            <input class="form-check-input" type="radio" name="sex" id="sex_men" value="men" checked>
+                            <label class="form-check-label" for="sex_men">
+                                Mężczyzna
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="sex" id="sex_women" value="women">
+                            <label class="form-check-label" for="sex_women">
+                                Kobieta
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row mt-2 mb-2 text-center" >
+                <div class="col-md-4 mb-2">
+                    <div class="form-group">
+                        <label for="age">Podaj swoj wiek</label>
+                        <input type="number" onkeypress="return event.charCode >= 48" min="1" name="wiek" id="age" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col mb-2">
+                    <div class="form-group">
+                        <label for="weight">Podaj swoją wage(kg)</label>
+                        <input type="number" name="waga" min="0" step="0.1" id="weight" class="form-control" required>
+                    </div>
+                </div>
+                <div class="col mb-2">
+                    <div class="form-group">
+                        <label for="height">Podaj swoj wzrost(cm)</label>
+                        <input type="number" name="wzrost" min="0" step="0.1" id="height" class="form-control mb-2" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="active">Określ swoja aktywność fizyczną</label>
+                    <select required name="aktywność"  id="active" class="form-control mb-2" >
+                        <option value="">Wybierz swoją aktywność</option>
+                        <option value="1">Siedzący</option>
+                        <option value="2">Umiarkowanie aktywny</option>
+                        <option value="3">Aktywny</option>
+                        <option value="4">Bardzo aktywny</option>
+                        <option value="5">Ekstremalnie aktywny</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="goal">Określ swój cel</label>
+                    <select required name="cele" id="goal" class="form-control mb-2">
+                        <option value="">Wybierz swój cel</option>
+                        <option value="a">Masa</option>
+                        <option value="b">Redukcja</option>
+                        <option value="c">Utrzymanie wagi</option>
+                    </select>
+                </div>
+            </div>
+            <div class="button">
+                <input class="btn btn-color mb-2 col-3 " type="button" value="Oblicz" onclick="BMI()">
+            </div>
+        </form>
+        <div class="calorie" id="calorie_ukryte">
+            <div class="text-center">
+                <p >Twoje zapotrzebowanie to: </p>
+                <div class="Kaloriee"></div>
+            </div>
+            <div id="makro">
+                <div class="row mt-2 mb-2 text-center" >
+                    <div class="col-md-4 mb-2">
+                        Białko
+                        <div class="Bialko"></div>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        Tłuszcze
+                        <div class="Tluszcze"></div>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        Węglowodany
+                        <div class="Weglowodany"></div>
+                    </div>
+                </div>
+                <div class="button2">
+                    <button class="btn btn-color mb-2 col-4 buttonik" onclick="wyslijBMI()">
+                        Dodaj zapotrzebowanie
+
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</main>
+<script src="/js/addCalorie.js"></script>
+<script src="/webjars/sweetalert/2.1.0/sweetalert.min.js"></script>
+<script src="/webjars/jquery-ui/1.12.0/jquery-ui.js"></script>
+</body>
+</html>

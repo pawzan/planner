@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script type="text/javascript" src="/webjars/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/styleRegLog.css"/>
+</head>
+<body>
+<div class="container">
+    <div class="nextContainer">
+        <header>Zarejestruj się</header>
+        <form th:action="@{/process_register}" th:object="${user}" method="post" >
+            <div class="loginDetails">
+                <div class="dataSpace">
+                    <label>Login</label>
+                    <input type="text"  placeholder="Login" th:field="*{login}" required
+                        minlength="6" maxlength="50" />
+                </div>
+                <div class="dataSpace">
+                    <label>Haslo</label>
+                    <input type="password"  placeholder="Haslo" th:field="*{password}" required
+                           minlength="6" maxlength="255" />
+                </div>
+                <div class="dataSpace">
+                    <label>E-mail</label>
+                    <input type="email"  placeholder="E-mail" th:field="*{email}" required
+                           minlength="6" maxlength="255" />
+                </div>
+
+                <div class="dataSpace button">
+                    <input type="submit" value="Zarejestruj się">
+                </div>
+            </div>
+        </form>
+        <div class="link">Masz już konto? Zaloguj się  <a th:href="@{/}">tutaj</a></div>
+    </div>
+
+</div>
+
+</body>
+</html>

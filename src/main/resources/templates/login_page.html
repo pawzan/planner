@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Strona główna</title>
+    <script type="text/javascript" src="/webjars/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/stylePage.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light  bg-navbar mr-1">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="img/logo.png" width="50" height="50" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"  aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarScroll">
+            <ul class="navbar-nav me-auto my-2 my-lg-0 s">
+                <li  class="nav-item ">
+
+                    <a id="jadlospis" class="nav-link font" th:href="@{/foodmenu}"><img src="img/restaurant.png" width="20" height="20" alt="" class="align-top"> JADŁOSPIS</a>
+                </li>
+                <li class="nav-item">
+                    <a id="licznik" class="nav-link font" th:href="@{/measurement}"><img src="img/cwiczenia.png" width="20" height="20" alt="" class="align-top"> POMIAR CIALA</a>
+                </li>
+
+            </ul>
+            <form th:action="@{/logout}" method="post">
+                <input class="btn btn-color" type="submit" value="Wyloguj sie" />
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="container">
+<!--    <input type="text" th:value="${user.id}"/>-->
+</div>
+</body>
+</html>
