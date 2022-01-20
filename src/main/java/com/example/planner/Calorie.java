@@ -18,12 +18,12 @@ public class Calorie {
 
     ///TO DO naprawid unkonw column 'kalorie_posilku' in 'field_list'
     private String nazwa;
-    private String kaloriePosilku;
+    private String kalorie_posilku;
     private String kaloriena100;
-//    private String bialkoPosilku;
-    private String tluszczePosilku;
-    private String weglePosilku;
-//    private String dataDodania;
+    private String bialko_posilku;
+    private String tluszcze_posilku;
+    private String wegle_posilku;
+    private String data_dodania;
 
 
     @OneToOne

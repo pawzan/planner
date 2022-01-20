@@ -76,9 +76,9 @@ if(ilosc > 0 && kalorie > 0 && weightProtein > 0 && weightFat > 0 && weightCarbo
           type: "POST",
           contentType: "application/json",
           url: window.location + "/process_addMeal",
-          data: JSON.stringify({nazwa:name,kaloriePosilku:JSON.stringify(Kaloriee),
-                kaloriena100:kalorie,bialkoPosilku:weightProtein,tluszczePosilku:weightFat,
-                weglePosilku:weightCarbo,dataDodania:dateFormat}),
+          data: JSON.stringify({nazwa:name,kalorie_posilku:JSON.stringify(Kaloriee),
+                kaloriena100:kalorie,bialko_posilku:weightProtein,tluszcze_posilku:weightFat,
+                wegle_posilku:weightCarbo,data_dodania:dateFormat}),
           dataType: "json",
           success: function(data){alert(data);},
           failure: function(errMsg) {
