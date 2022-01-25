@@ -13,7 +13,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
+
+
 import javax.sql.DataSource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Configuration
 @EnableWebSecurity
@@ -46,6 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
+    LocalDate localDate = LocalDate.now();
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -56,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                     .loginPage("/login")
-                    .defaultSuccessUrl("/foodmenu")
+                    .defaultSuccessUrl("/foodmenu?dates=" + localDate)
                 .permitAll()
                 .and()
                 .logout()

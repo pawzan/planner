@@ -13,10 +13,9 @@ import javax.persistence.*;
 public class Calorie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_posilku;
+    private long id_posilku;
 
 
-    ///TO DO naprawid unkonw column 'kalorie_posilku' in 'field_list'
     private String nazwa;
     private String kalorie_posilku;
     private String kaloriena100;
@@ -26,6 +25,7 @@ public class Calorie {
     private String data_dodania;
 
 
+
     @OneToOne
     @JoinColumn(name = "posilki_id_uzytkownika", referencedColumnName = "id")
     private User user;
@@ -33,4 +33,6 @@ public class Calorie {
     public User getUser() {
         return user;
     }
+
+
 }

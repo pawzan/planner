@@ -8,36 +8,35 @@ function zero(liczba) {
 }
 var today = new Date();
 var dateFormat = today.getFullYear()+'-'+(zero(today.getMonth()+1))+'-'+zero(today.getDate());
-console.log(dateFormat);
-$(document).ready(function()
-{
-  
-   
-   load_data(dateFormat);
-    function load_data(date = ''){
-            $.ajax({
-                contentType: "application/json",
-                type: "POST",
-                url: window.location,
-                data: JSON.stringify(date),
-                dataType:"json",
-                success:function(data){
-                    $('#result').html(data);
-                }
-        
-            });
-            
-        }
-        $("#dates").datepicker({
-            onSelect: function(){
-                var date = $('#dates').datepicker({ dateFormat: 'yyyy-MM-dd' }).val();
-                console.log(date);
-                load_data(date);
-        }}).datepicker("setDate", new Date());
-
-     
-        
-});
+//$(document).ready(function()
+//{
+//
+//
+//   load_data(dateFormat);
+//    function load_data(date = ''){
+//            $.ajax({
+//                contentType: "application/json",
+//                type: "GET",
+//                url: window.location,
+//                data: JSON.stringify(date),
+//                dataType:"json",
+//                success:function(data){
+//                    $('#result').html(data);
+//                }
+//
+//            });
+//
+//        }
+//        $("#dates").datepicker({
+//            onSelect: function(){
+//                var date = $('#dates').datepicker({ dateFormat: 'yyyy-MM-dd' }).val();
+//                console.log("sad " + date);
+//                load_data(date);
+//        }}).datepicker("setDate", new Date());
+//
+//
+//
+//});
 
 
 function zmiana(){
@@ -75,16 +74,16 @@ if(ilosc > 0 && kalorie > 0 && weightProtein > 0 && weightFat > 0 && weightCarbo
     $.ajax({
           type: "POST",
           contentType: "application/json",
-          url: window.location + "/process_addMeal",
+          url: "/process_addMeal",
           data: JSON.stringify({nazwa:name,kalorie_posilku:JSON.stringify(Kaloriee),
                 kaloriena100:kalorie,bialko_posilku:weightProtein,tluszcze_posilku:weightFat,
                 wegle_posilku:weightCarbo,data_dodania:dateFormat}),
           dataType: "json",
-          success: function(data){alert(data);},
-          failure: function(errMsg) {
-            alert(errMsg);
-          }
+          success: window.location.replace("/foodmenu?dates=" + dateFormat),
           });
+          window.location.reload();
+
+
 }
 else
 {

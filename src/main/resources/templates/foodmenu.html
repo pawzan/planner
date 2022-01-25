@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-control" content="no-cache">
+
     <title>Jadlospis</title>
     <script type="text/javascript" src="/webjars/jquery/1.12.0/jquery.js"></script>
 
@@ -12,6 +14,8 @@
     <link rel="stylesheet" type="text/css" href="/css/stylePage.css"/>
     <link rel="stylesheet" type="text/css" href="/css/styleMeal.css"/>
     <link rel="stylesheet" href="/webjars/jquery-ui/1.12.0/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light  bg-navbar mr-1">
@@ -23,7 +27,7 @@
         <div class="collapse navbar-collapse " id="navbarScroll">
             <ul class="navbar-nav me-auto my-2 my-lg-0 s">
                 <li  class="nav-item ">
-                    <a id="jadlospis" class="nav-link font" th:href="@{/foodmenu}"><img src="img/restaurant.png" width="20" height="20" alt="" class="align-top"> JADŁOSPIS</a>
+                    <a id="jadlospis" class="nav-link font" ><img src="img/restaurant.png" width="20" height="20" alt="" class="align-top"> JADŁOSPIS</a>
                 </li>
                 <li class="nav-item">
                     <a id="licznik" class="nav-link font" th:href="@{/measurement}"><img src="img/cwiczenia.png" width="20" height="20" alt="" class="align-top"> POMIAR CIALA</a>
@@ -36,15 +40,18 @@
         </div>
     </div>
 </nav>
+<form th:action="@{/foodmenu}">
 <div class="d-flex justify-content-center">
     <div class="callender">
         <div class="col-sm mb-2 m-2">
             <div class="form-group">
-                <input  type="text" name="dates" id="dates" class="form-control"  >
+                <input th:value="${dates}" type="date" name="dates" id="dates" class="form-control"  >
+                <input class="btn btn-color" type="submit" value="Szukaj">
             </div>
         </div>
     </div>
 </div>
+</form>
 <main>
     <div class="container">
 
@@ -54,21 +61,25 @@
                     <thead>
                     <tr>
                         <th scope="col" >Nazwa</th>
-                        <th scope="col" >Kalorie na 100g</th>
+                        <th scope="col" >Kalorie</th>
                         <th scope="col" >Białko</th>
                         <th scope="col" >Tłuszcze</th>
                         <th scope="col" >Węglowodany</th>
+                        <th scope="col">Akcje</th>
 
                     </tr>
                     </thead>
                     <tbody>
 
-                    <tr class="item-model-number">
-                        <td id="name1">nazwa</td>
-                        <td id="kaloriecheck">kaloriena100</td>
-                        <td id="bialkocheck">bialkoPosilku</td>
-                        <td id="tluszczecheck">tluszczePosilku</td>
-                        <td id="weglecheck">weglePosilku</td>
+                    <tr class="item-model-number " th:each="calorie:${listCalorie2}">
+                        <td id="name1" th:text="${calorie.nazwa}"></td>
+                        <td id="kaloriecheck" th:text="${calorie.kalorie_posilku}"></td>
+                        <td id="bialkocheck" th:text="${calorie.bialko_posilku}"></td>
+                        <td id="tluszczecheck" th:text="${calorie.tluszcze_posilku}"></td>
+                        <td id="weglecheck" th:text="${calorie.wegle_posilku}"></td>
+                        <td id="usun">
+                            <a th:href="@{'/delete/' + ${calorie.id_posilku}}"><i class="bi bi-trash-fill text-danger"></i></a>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -76,7 +87,37 @@
         </div>
 
 
-        <form >
+<!--        <div class="progresss">-->
+<!--            Kalorie-->
+<!--            <div class="progress prog" style="width:10%;margin-left: 10px;float: left;margin-right: 10px;" >-->
+<!--                <div class="progress-bar bg-success" role="progressbar" style="width:'.(($ile_zjadles_progess*100)/$zapotrzebowanieUzytkownika).'%"  aria-valuenow="'.($ile_zjadles_progess/100).'" aria-valuemin="0" aria-valuemax="'.$zapotrzebowanieUzytkownika.'"></div>-->
+<!--            </div>-->
+<!--            '.$ile_zjadles_progess.'/<a th:text = "${demand.zapotrzebowanie}">kcal </a>-->
+<!--        </div>-->
+
+<!--        <div class="progresss">-->
+<!--            Bialko-->
+<!--            <div class="progress" style="width: 10%;float: left;margin-left: 10px;margin-right: 10px">-->
+<!--                <div class="progress-bar bg-info" role="progressbar" style="width:'.(($ile_bialka_progess*100)/$zapotrzebowanieBialko).'%"  aria-valuenow="'.($ile_bialka_progess/100).'" aria-valuemin="0" aria-valuemax="'.$zapotrzebowanieBialko.'"></div>-->
+<!--            </div>-->
+<!--            '.$ile_bialka_progess.'/'.$zapotrzebowanieBialko.' g-->
+<!--        </div>-->
+<!--        <div class="progresss">-->
+<!--            Tłuszcze-->
+<!--            <div class="progress" style="width: 10%;float: left;margin-left: 10px;margin-right: 10px">-->
+<!--                <div class="progress-bar bg-warning" role="progressbar" style="width:'.($ile_tluszczy_progess*100)/$zapotrzebowanieTluszcze.'%"  aria-valuenow="'.($ile_tluszczy_progess/100).'" aria-valuemin="0" aria-valuemax="'.$zapotrzebowanieTluszcze.'"></div>-->
+<!--            </div>-->
+<!--            '.$ile_tluszczy_progess.'/'.$zapotrzebowanieTluszcze.' g-->
+<!--        </div>-->
+<!--        <div class="progresss">-->
+<!--            Węglowodany-->
+<!--            <div class="progress " style="width: 10%;margin-left: 10px;;margin-right: 10px">-->
+<!--                <div class="progress-bar bg-danger" role="progressbar" style="width:'.($ile_wegli_progess*100)/$zapotrzebowanieWegle.'%"  aria-valuenow="'.($ile_wegli_progess/100).'" aria-valuemin="0" aria-valuemax="'.$zapotrzebowanieWegle.'"></div>-->
+<!--            </div>-->
+<!--            '.$ile_wegli_progess.'/'.$zapotrzebowanieWegle.' g-->
+<!--        </div>-->
+
+        <form>
             <p class="text-center mt-2" >Dodaj własne kalorie posiłku</p>
             <div class="row mt-2 text-center" >
                 <div class="col-sm col-lg col-md">
@@ -122,21 +163,45 @@
         </form>
 
         <div class="errorText"></div>
-    </div>
-        </div>
-
-
         <div class="ukryte_dodawanie">
             <div class="d-flex justify-content-center">
-                <form id="searchForm">
-                    <p class="text-center" >Wyszukaj posiłek w bazie</p>
-                    <input type="text" id="search_box" placeholder="Wyszukaj posiłek">
+                <form th:action="@{/foodmenu}" id="searchForm">
+                    <label for="keyword" class="text-center ms-3" >Wyszukaj posiłek w bazie: </label>
+                    <input type="text" th:value="${keyword}" id="keyword" name="keyword" placeholder="Wyszukaj posiłek">
+                    &nbsp;
+                    <input class="btn btn-color" type="submit" value="Szukaj">
                 </form>
             </div>
         </div>
-            <div class="resultshare2">
+        <div id="resultshare2">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col" >Nazwa</th>
+                        <th scope="col" >Kalorie na 100g</th>
+                        <th scope="col" >Białko</th>
+                        <th scope="col" >Tłuszcze</th>
+                        <th scope="col" >Węglowodany</th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-             </div>
+                    <tr class="item-model-number " th:each="calorie:${listCalorie}">
+                        <td id="name2" th:text="${calorie.nazwa}"></td>
+                        <td id="kaloriecheck1" th:text="${calorie.kaloriena100}"></td>
+                        <td id="bialkocheck1" th:text="${calorie.bialko_posilku}"></td>
+                        <td id="tluszczecheck1" th:text="${calorie.tluszcze_posilku}"></td>
+                        <td id="weglecheck1" th:text="${calorie.wegle_posilku}"></td>
+                        <td id="dodaj" onclick="dodajIstniejace()">wybierz</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+
 
 
 </main>

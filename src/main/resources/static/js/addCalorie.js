@@ -236,7 +236,16 @@ $.ajax({
 
 
 }
+function zero(liczba) {
+    return liczba=(liczba < 10)? "0"+liczba : liczba;
+}
+var today = new Date();
+var dateFormat = today.getFullYear()+'-'+(zero(today.getMonth()+1))+'-'+zero(today.getDate());
+console.log(dateFormat);
+function ww(){
+     window.location.replace("/foodmenu?dates=" + dateFormat);
 
+    }
 
 
 
