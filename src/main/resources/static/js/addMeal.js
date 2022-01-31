@@ -103,3 +103,48 @@ else
 }
 }
 
+
+$(document).ready(function(){
+    var TotalValue = 0;
+    $("tr #kaloriecheck").each(function(index, value){
+         currentRow = parseFloat($(this).text());
+         TotalValue += currentRow
+    });
+    console.log(TotalValue);
+          document.getElementById('total_id_za').textContent =  TotalValue;
+
+});
+
+$(document).ready(function(){
+    var TotalValue2 = 0;
+    $("tr #bialkocheck").each(function(index, value){
+         currentRow = parseFloat($(this).text());
+         TotalValue2 += currentRow
+    });
+    console.log(TotalValue2);
+                document.getElementById('total_id_bi').textContent =  TotalValue2;
+});
+
+$(document).ready(function(){
+    var TotalValue3 = 0;
+    $("tr #tluszczecheck").each(function(index, value){
+         currentRow = parseFloat($(this).text());
+         TotalValue3 += currentRow
+    });
+    console.log(TotalValue3);
+                       document.getElementById('total_id_tl').textContent =  TotalValue3;
+});
+
+$(document).ready(function(){
+    var TotalValue4 = 0;
+    $("tr #weglecheck").each(function(index, value){
+         currentRow = parseFloat($(this).text());
+         TotalValue4 += currentRow
+    });
+     console.log(TotalValue4);
+                        document.getElementById('total_id_we').textContent =  TotalValue4;
+});
+
+
+
+

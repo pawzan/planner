@@ -54,20 +54,6 @@ public class AppController {
         return "measurement";
     }
 
-
-
-
-//    @PostMapping("/process_addMeal")
-//    public String processAddMeal(@RequestBody Calorie calorie){
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        User user = userRepository.findByLogin(auth.getName());
-//        calorie.setUser(user);
-//        this.calorieRepository.save(calorie);
-//
-//        return "foodmenu";
-//
-//    }
-
     LocalDate localDate = LocalDate.now();
 
     @PostMapping("/process_addMeal")
@@ -92,14 +78,14 @@ public class AppController {
     {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByLogin(auth.getName());
-//        model.addAttribute("getCalorie", calorieRepository.findAllByUser(user));
         List<Calorie> listCalorie2 = calorieRepository.listAllDate(dates,user);
         model.addAttribute("listCalorie2", listCalorie2);
         model.addAttribute("dates", dates);
         List<Calorie> listCalorie = calorieRepository.listAll(keyword);
         model.addAttribute("listCalorie", listCalorie);
         model.addAttribute("keyword", keyword);
-
+        List<Demand> listDemand = demandRepository.listAllDemand(user);
+        model.addAttribute("listDemand", listDemand);
         return "foodmenu";
     }
 
