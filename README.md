@@ -1,8 +1,4 @@
-                                PLANER
-
-
-                                        Paweł Zaniewski
-
+    PLANER Paweł Zaniewski
 
 Opis projektu:
 
