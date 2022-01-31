@@ -1,4 +1,4 @@
-    PLANER Paweł Zaniewski
+    PLANER 
 
 Opis projektu:
 
